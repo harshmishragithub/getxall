@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // Save login status in GetStorage
     box.write('isLoggedIn', true);
     box.write('username', username);
 
@@ -46,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
       margin: const EdgeInsets.all(16),
     );
 
-    // Navigate to HomePage
     Get.offAll(() => const HomePage());
   }
 
@@ -82,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // App Brand Logo Container
                   Center(
                     child: Container(
                       width: 72,
@@ -110,7 +107,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
                   const Text(
                     'Welcome Back',
                     textAlign: TextAlign.center,
@@ -131,8 +127,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 32),
-
-                  // Username Input
                   TextField(
                     controller: usernameController,
                     decoration: InputDecoration(
@@ -157,8 +151,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
-
-                  // Password Input
                   TextField(
                     controller: passwordController,
                     obscureText: true,
@@ -184,8 +176,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 28),
-
-                  // Login Submit Button
                   ElevatedButton(
                     onPressed: login,
                     style: ElevatedButton.styleFrom(

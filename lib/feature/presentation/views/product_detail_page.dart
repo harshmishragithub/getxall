@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/product_model.dart';
+import '../../data/product_model.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // 🔴 Get.arguments se data receive kiya
     final ProductModel product = Get.arguments;
 
     return Scaffold(
@@ -29,7 +28,6 @@ class ProductDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. Hero Product Image Card
               Container(
                 width: double.infinity,
                 height: 280,
@@ -49,14 +47,11 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // 2. Details Content Container
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title & Rating Badge
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,8 +93,6 @@ class ProductDetailPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-
-                    // Price Tag
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
@@ -116,8 +109,6 @@ class ProductDetailPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-
-                    // Description Section Card
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(18.0),

@@ -44,7 +44,6 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 1,
         actions: [
-          // 🔴 Price Sorting Toggle Button
           Obx(() => InkWell(
                 onTap: controller.togglePriceSort,
                 borderRadius: BorderRadius.circular(10),
@@ -78,8 +77,6 @@ class HomePage extends StatelessWidget {
                 ),
               )),
           const SizedBox(width: 8),
-
-          // 🔴 Logout Button
           IconButton(
             icon: const Icon(Icons.logout_rounded, color: Color(0xFFEF4444)),
             tooltip: 'Logout',
@@ -91,13 +88,12 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // 1. Search Bar Field with Debounce Listener
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: controller.searchController,
                 onChanged: (val) {
-                  controller.searchQuery.value = val; // Triggers GetX debounce
+                  controller.searchQuery.value = val;
                 },
                 decoration: InputDecoration(
                   hintText: 'Search products...',
@@ -130,8 +126,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
-            // 2. Product List & Pagination View
             Expanded(
               child: Obx(() {
                 if (controller.isLoading.value) {
@@ -161,12 +155,11 @@ class HomePage extends StatelessWidget {
                 }
 
                 return ListView.separated(
-                  controller: controller.scrollController, // Attach ScrollController
+                  controller: controller.scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  itemCount: controller.productList.length + 1, // +1 bottom loader ke liye
+                  itemCount: controller.productList.length + 1,
                   separatorBuilder: (context, index) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
-                    // Bottom loader item check
                     if (index == controller.productList.length) {
                       return Obx(() => controller.isLoadingMore.value
                           ? const Padding(
@@ -200,7 +193,6 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              // Product Thumbnail
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: Image.network(
@@ -217,8 +209,6 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 14),
-
-                              // Product Info
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

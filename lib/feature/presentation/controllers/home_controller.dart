@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/product_model.dart';
-import '../services/api_service.dart';
+import '../../data/api_service.dart';
+import '../../data/product_model.dart';
 
 class HomeController extends GetxController {
   final ApiService _apiService = ApiService();
@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   var isLoading = true.obs;          // Initial page loading
   var isLoadingMore = false.obs;      // Bottom pagination loader
   var searchQuery = ''.obs;           // Search input text
-  var isAscending = true.obs;         // 👈 Price Sorting order (true = Low to High, false = High to Low)
+  var isAscending = true.obs;         // Price Sorting order
 
   // Pagination variables
   int skip = 0;
@@ -51,7 +51,7 @@ class HomeController extends GetxController {
   // Initial fetch ya search refresh ke liye
   Future<void> fetchProducts({bool isRefresh = false}) async {
     if (isRefresh) {
-      skip = 0; // Search badalne par skip reset kar do
+      skip = 0;
     }
 
     isLoading.value = true;
@@ -67,7 +67,6 @@ class HomeController extends GetxController {
       totalProducts = response.total;
       skip = response.products.length;
 
-      // Current sort order apply karo
       _applySort();
     }
 
@@ -85,29 +84,26 @@ class HomeController extends GetxController {
     );
 
     if (response != null && response.products.isNotEmpty) {
-      productList.addAll(response.products); // Naye products list me aage add karo
+      productList.addAll(response.products);
       skip += response.products.length;
 
-      // Current sort order apply karo
       _applySort();
     }
 
     isLoadingMore.value = false;
   }
 
-  // 🔴 Price Sorting Function (Low <-> High toggle)
+  // Price Sorting Function (Low <-> High toggle)
   void togglePriceSort() {
-    isAscending.value = !isAscending.value; // Toggle order
+    isAscending.value = !isAscending.value;
     _applySort();
   }
 
   // Helper method for sorting list by price
   void _applySort() {
     if (isAscending.value) {
-      // Low to High Price
       productList.sort((a, b) => a.price.compareTo(b.price));
     } else {
-      // High to Low Price
       productList.sort((a, b) => b.price.compareTo(a.price));
     }
   }
